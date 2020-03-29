@@ -1,11 +1,7 @@
 # myTunes
 
 ## **Intro**
-
-**Front End Repository**: (https://github.com/sei-nope/inStock-client)
-**Back End Repository**: (https://github.com/sei-nope/inStock-api)
-**Front End Deployed Site**: (https://sei-nope.github.io/inStock-client/)
-**Back End Deployed Site**: (https://stark-reaches-40888.herokuapp.com/)
+This is my myTunes front-end application.
 
 **Templates**
 - [React Template] (https://git.generalassemb.ly/ga-wdi-boston/react-auth-template)
