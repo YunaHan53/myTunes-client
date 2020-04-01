@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 
 // Import song form
-import SongForm from '../SongForm/SongForm'
+import SongForm from '../shared/SongForm'
 // Import axios
 import axios from 'axios'
 // Import apiUrl
@@ -39,11 +39,10 @@ class SongEdit extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-
+    console.log(this.props)
     axios({
       method: 'patch',
-      url: `${apiUrl}/songs/
-      ${this.props.match.params.id}`,
+      url: `${apiUrl}/songs/${this.props.match.params.id}`,
       data: { song: this.state.song },
       headers: {
         Authorization: `Bearer ${this.props.user.token}`
@@ -68,10 +67,10 @@ class SongEdit extends Component {
     const { song, updated } = this.state
 
     if (updated) {
-      return <Redirect to={`/songs/
-        ${this.props.match.params.id}`} />
+      return <Redirect to={`/songs/${this.props.match.params.id}`} />
     }
 
+    console.log(song)
     return (
       <div>
         <h3>Update Song Here</h3>

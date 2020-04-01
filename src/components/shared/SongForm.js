@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const SongForm = ({ song, handleSubmit, handleChange, cancelPath }) => (
-  <form onSubmit={handleSubmit}>
-    <label>Title</label>
+  <form className='inline-form' onSubmit={handleSubmit}>
+    <label className='mt-2 mr-2'>Title</label>
     <input
+      className='form-control mt-2 mr-2'
       placeholder="Song Title"
       value={song.title}
       name="title"
@@ -12,8 +13,9 @@ const SongForm = ({ song, handleSubmit, handleChange, cancelPath }) => (
       required
     />
 
-    <label>Artist</label>
+    <label className='mt-2 mr-2'>Artist</label>
     <input
+      className='form-control mt-2 mr-2'
       placeholder="Artist"
       value={song.artist}
       name="artist"
@@ -21,25 +23,29 @@ const SongForm = ({ song, handleSubmit, handleChange, cancelPath }) => (
       required
     />
 
-    <label>Album</label>
+    <label className='mt-2 mr-2'>Album</label>
     <input
+      className='form-control mt-2 mr-2'
       placeholder="Album"
       value={song.album}
       name="album"
       onChange={handleChange}
     />
 
-    <label>Year Released</label>
+    <label className='mt-2 mr-2'>Year Released</label>
     <input
-      type="integer"
+      className='form-control mt-2 mr-2'
+      type="number"
       placeholder="YYYY"
       value={song.year}
       name="year"
       onChange={handleChange}
     />
 
-    <label>Link URL</label>
+    <label className='mt-2 mr-2'>Link URL</label>
     <input
+      type='url'
+      className='form-control mt-2 mr-2'
       placeholder="https://example-song.com/song"
       value={song.url}
       name="url"
@@ -47,7 +53,7 @@ const SongForm = ({ song, handleSubmit, handleChange, cancelPath }) => (
       required
     />
 
-    <button type="submit">Submit</button>
+    <button className='mt-2 mr-2' type="submit">Submit</button>
     <Link to={cancelPath}>
       <button>Cancel</button>
     </Link>

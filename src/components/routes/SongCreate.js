@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 
 // Import song form
-import SongForm from '../SongForm/SongForm'
+import SongForm from '../shared/SongForm'
 // Import axios
 import axios from 'axios'
 // Import apiUrl

@@ -14,6 +14,8 @@ import Song from '../routes/Song'
 import SongCreate from '../routes/SongCreate'
 import SongEdit from '../routes/SongEdit'
 
+import Home from '../Home/Home'
+
 class App extends Component {
   constructor () {
     super()
@@ -65,12 +67,15 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/songs/:id/edit' render={({ match }) => (
             <SongEdit msgAlert={this.msgAlert} user={user} match={match} />
           )} />
-          <Route exact user={user} path='/songs' render={() => (
-            <Songs msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} exact path='/songs' render={() => (
+            <Songs msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )}/>
-          <Route exact path='/songs/:id' render={({ match }) => (
+          <AuthenticatedRoute user={user} exact path='/songs/:id' render={({ match }) => (
             <Song msgAlert={this.msgAlert} user={user} match={match} />
           )}/>
+          <AuthenticatedRoute user={user} exact path='/home' render={() => (
+            <Home msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
+          )} />
         </main>
       </Fragment>
     )
