@@ -9,8 +9,14 @@ This is my myTunes front-end application.
 
 **ERD**
 
+---
+  ![](src/images/ERD.png)
+
 
 **WireFrames**
+
+---
+  ![](src/images/Wireframes.png)
 
 
 **User Stories**
