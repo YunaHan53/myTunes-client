@@ -46,7 +46,7 @@ const SongForm = ({ song, handleSubmit, handleChange, cancelPath }) => (
     <input
       type='url'
       className='form-control mt-2 mr-2'
-      placeholder="https://example-song.com/song"
+      placeholder="https://example.com/song"
       value={song.url}
       name="url"
       onChange={handleChange}

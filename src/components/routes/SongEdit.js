@@ -28,7 +28,7 @@ class SongEdit extends Component {
   componentDidMount () {
     axios({
       url: `${apiUrl}/songs/${this.props.match.params.id}`,
-      method: 'get',
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${this.props.user.token}`
       }
@@ -39,9 +39,8 @@ class SongEdit extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log(this.props)
     axios({
-      method: 'patch',
+      method: 'PATCH',
       url: `${apiUrl}/songs/${this.props.match.params.id}`,
       data: { song: this.state.song },
       headers: {
@@ -70,7 +69,7 @@ class SongEdit extends Component {
       return <Redirect to={`/songs/${this.props.match.params.id}`} />
     }
 
-    console.log(song)
+    // console.log(song)
     return (
       <div>
         <h3>Update Song Here</h3>

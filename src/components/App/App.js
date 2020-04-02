@@ -14,6 +14,8 @@ import Song from '../routes/Song'
 import SongCreate from '../routes/SongCreate'
 import SongEdit from '../routes/SongEdit'
 
+import SongPlayer from '../SongPlayer/SongPlayer'
+
 import Home from '../Home/Home'
 
 class App extends Component {
@@ -72,6 +74,9 @@ class App extends Component {
           )}/>
           <AuthenticatedRoute user={user} exact path='/songs/:id' render={({ match }) => (
             <Song msgAlert={this.msgAlert} user={user} match={match} />
+          )}/>
+          <AuthenticatedRoute user={user} exact path='/songs/song-player/' render={({ match }) => (
+            <SongPlayer msgAlert={this.msgAlert} user={user} match={match} />
           )}/>
           <AuthenticatedRoute user={user} exact path='/home' render={() => (
             <Home msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />

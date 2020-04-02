@@ -5,8 +5,8 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 class Song extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     this.state = {
       song: null,
@@ -44,15 +44,23 @@ class Song extends Component {
         <img src="https://media.giphy.com/media/1416VN7GIFAAmI/giphy.gif" />
       )
     }
+    // console.log(this.props.match.params.id)
+    // console.log(song.url)
 
     return (
-    // Display song
+    // Display song info
       <div>
         <h3>{song.title}</h3>
         <p>Artist: {song.artist}</p>
         <p>Album: {song.album}</p>
         <p>Year Released: {song.year}</p>
-        <p>Link: <Link to={song.url}>
+        <p>Link: <Link to={{
+          pathname: '/songs/song-player/',
+          state: {
+            fromSong: true,
+            song: song.url
+          }
+        }}>
           {song.url}
         </Link>
         </p>
