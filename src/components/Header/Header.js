@@ -20,7 +20,7 @@ const unauthenticatedOptions = (
 
 const alwaysOptions = (
   <Fragment>
-    <Nav.Link className="link" href="/myTunes-client/Home">Home</Nav.Link>
+    <Nav.Link className="link" href="/myTunes-client/#">Home</Nav.Link>
   </Fragment>
 )
 
