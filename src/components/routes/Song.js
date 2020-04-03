@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
+
 import axios from 'axios'
 
 import apiUrl from '../../apiConfig'
@@ -49,7 +51,7 @@ class Song extends Component {
 
     return (
     // Display song info
-      <div>
+      <div className='song-info'>
         <h3>{song.title}</h3>
         <p>Artist: {song.artist}</p>
         <p>Album: {song.album}</p>
@@ -65,11 +67,11 @@ class Song extends Component {
         </Link>
         </p>
         <Link to={`/songs/${this.props.match.params.id}/edit`}>
-          <button>Update Song</button>
+          <Button variant="outline-success">Update Song</Button>
         </Link>
-        <button onClick={this.delete}>Delete Song</button>
+        <Button variant="outline-success" onClick={this.delete}>Delete Song</Button>
         <Link to="/songs">
-          <button>Back to song list</button>
+          <Button variant="outline-success">Back to song list</Button>
         </Link>
       </div>
     )

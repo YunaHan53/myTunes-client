@@ -40,7 +40,7 @@ class Songs extends Component {
       // Display the Songs
       const songList = songs.map(song => (
         <li key={song._id}>
-          <Link to={`/songs/${song._id}`}>{song.title}</Link>
+          <Link className="song-link" to={`/songs/${song._id}`}>{song.title}</Link>
         </li>
       ))
 
@@ -55,7 +55,7 @@ class Songs extends Component {
 
     return (
       <div>
-        <h1>Songs Page</h1>
+        <h1 className="title">Songs Page</h1>
         {songJSX}
       </div>
     )

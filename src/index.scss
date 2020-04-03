@@ -1,1 +1,53 @@
 @import '~bootstrap/scss/bootstrap';
+
+$element-background-color: #000;
+$element-light-color: #fff;
+$page-background-color: #E1FEB0;
+$styled-font: 'Pacifico', cursive, Arial, Sans-serif;
+$basic-font: 'Dosis', sans-serif;
+
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 3%;
+}
+
+.song-info {
+  font-family: $styled-font;
+}
+
+.song-link {
+  color: $success;
+  font-family: $styled-font;
+}
+
+.link {
+  font-family: $styled-font;
+}
+
+.nav-title {
+  font-family: $styled-font;
+}
+
+div .title {
+  font-family: $basic-font;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: #fff;
+  background: $success;
+  font-family: $styled-font;
+  text-align: center;
+  display: inline;
+  padding: 0 10px;
+}

@@ -59,7 +59,7 @@ class SongCreate extends Component {
     }
     return (
       <div>
-        <h3>Create Song Here</h3>
+        <h3 className="title">Create Song Here</h3>
         <SongForm
           song={song}
           handleChange={handleChange}

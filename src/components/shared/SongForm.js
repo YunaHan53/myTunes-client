@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 const SongForm = ({ song, handleSubmit, handleChange, cancelPath }) => (
   <form className='inline-form' onSubmit={handleSubmit}>
@@ -53,9 +54,9 @@ const SongForm = ({ song, handleSubmit, handleChange, cancelPath }) => (
       required
     />
 
-    <button className='mt-2 mr-2' type="submit">Submit</button>
+    <Button variant="outline-success" className='mt-2 mr-2' type="submit">Submit</Button>
     <Link to={cancelPath}>
-      <button>Cancel</button>
+      <Button variant="outline-danger" className='mt-2 mr-2'>Cancel</Button>
     </Link>
   </form>
 )

@@ -72,7 +72,7 @@ class SongEdit extends Component {
     // console.log(song)
     return (
       <div>
-        <h3>Update Song Here</h3>
+        <h3 className="title">Update Song Here</h3>
         <SongForm
           song={song}
           handleChange={handleChange}

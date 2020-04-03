@@ -4,29 +4,29 @@ import Navbar from 'react-bootstrap/Navbar'
 
 const authenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#songs-create">Create Song</Nav.Link>
-    <Nav.Link href="#songs">Song List</Nav.Link>
-    <Nav.Link href="#change-password">Change Password</Nav.Link>
-    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
+    <Nav.Link className="link" href="#songs-create">Create Song</Nav.Link>
+    <Nav.Link className="link" href="#songs">Song List</Nav.Link>
+    <Nav.Link className="link" href="#change-password">Change Password</Nav.Link>
+    <Nav.Link className="link" href="#sign-out">Sign Out</Nav.Link>
   </Fragment>
 )
 
 const unauthenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#sign-up">Sign Up</Nav.Link>
-    <Nav.Link href="#sign-in">Sign In</Nav.Link>
+    <Nav.Link className="link" href="#sign-up">Sign Up</Nav.Link>
+    <Nav.Link className="link" href="#sign-in">Sign In</Nav.Link>
   </Fragment>
 )
 
 const alwaysOptions = (
   <Fragment>
-    <Nav.Link href="/">Home</Nav.Link>
+    <Nav.Link className="link" href="/Home">Home</Nav.Link>
   </Fragment>
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
-    <Navbar.Brand href="#">
+  <Navbar className="navbar" bg="success" variant="dark" expand="md">
+    <Navbar.Brand className="nav-title" href="#">
       myTunes
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
