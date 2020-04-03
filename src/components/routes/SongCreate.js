@@ -28,6 +28,8 @@ class SongCreate extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
+    const { msgAlert } = this.props
+
     axios({
       method: 'post',
       url: `${apiUrl}/songs/`,
@@ -39,7 +41,12 @@ class SongCreate extends Component {
       .then((res) => {
         this.setState({ created: true, createId: res.data.song._id })
       })
-      .catch(console.error)
+      .catch(error => {
+        msgAlert({
+          heading: 'Create Song Failed with error: ' + error.message,
+          variant: 'danger'
+        })
+      })
   }
 
   handleChange = (event) => {

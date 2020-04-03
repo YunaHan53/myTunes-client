@@ -26,6 +26,8 @@ class SongEdit extends Component {
 
   // Finds the song
   componentDidMount () {
+    const { msgAlert } = this.props
+
     axios({
       url: `${apiUrl}/songs/${this.props.match.params.id}`,
       method: 'GET',
@@ -34,11 +36,19 @@ class SongEdit extends Component {
       }
     })
       .then(res => this.setState({ song: res.data.song }))
-      .catch(console.error)
+      .catch(error => {
+        msgAlert({
+          heading: 'Update Failed with error: ' + error.message,
+          variant: 'danger'
+        })
+      })
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
+
+    const { msgAlert } = this.props
+
     axios({
       method: 'PATCH',
       url: `${apiUrl}/songs/${this.props.match.params.id}`,
@@ -50,7 +60,12 @@ class SongEdit extends Component {
       .then((res) => {
         this.setState({ updated: true })
       })
-      .catch(console.error)
+      .catch(error => {
+        msgAlert({
+          heading: 'Update Failed with error: ' + error.message,
+          variant: 'danger'
+        })
+      })
   }
 
   handleChange = (event) => {

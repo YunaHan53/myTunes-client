@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
+
 import Button from 'react-bootstrap/Button'
 
+// Import Axios:
 import axios from 'axios'
-
+// Import apiConfig:
 import apiUrl from '../../apiConfig'
 
 class Song extends Component {
@@ -17,12 +19,21 @@ class Song extends Component {
   }
 
   componentDidMount () {
+    const { msgAlert } = this.props
+
     axios(`${apiUrl}/songs/${this.props.match.params.id}`)
       .then(res => this.setState({ song: res.data.song }))
-      .catch(console.error)
+      .catch(error => {
+        msgAlert({
+          heading: 'Get Song Failed with error: ' + error.message,
+          variant: 'danger'
+        })
+      })
   }
 
   delete = () => {
+    const { msgAlert } = this.props
+
     axios({
       url: `${apiUrl}/songs/${this.props.match.params.id}`,
       method: 'DELETE',
@@ -31,7 +42,12 @@ class Song extends Component {
       }
     })
       .then(() => this.setState({ deleted: true }))
-      .catch(console.error)
+      .catch(error => {
+        msgAlert({
+          heading: 'Delete Song Failed with error: ' + error.message,
+          variant: 'danger'
+        })
+      })
   }
 
   render () {

@@ -16,6 +16,8 @@ class Songs extends Component {
   }
 
   componentDidMount () {
+    const { msgAlert } = this.props
+
     axios({
       url: `${apiUrl}/songs`,
       method: 'GET',
@@ -26,7 +28,12 @@ class Songs extends Component {
       .then(res => {
         this.setState({ songs: res.data.songs })
       })
-      .catch(console.error)
+      .catch(error => {
+        msgAlert({
+          heading: 'Get Songs Failed with error: ' + error.message,
+          variant: 'danger'
+        })
+      })
   }
 
   render () {
