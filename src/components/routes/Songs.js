@@ -1,72 +1,63 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+// import Table from 'react-bootstrap/Table'
 
 // Import Axios:
 import axios from 'axios'
 // Import apiConfig:
 import apiUrl from '../../apiConfig'
 
-class Songs extends Component {
-  constructor () {
-    super()
+const Songs = props => {
+  const [songs, setSongs] = useState([])
 
-    this.state = {
-      songs: null
-    }
-  }
-
-  componentDidMount () {
-    const { msgAlert } = this.props
-
+  useEffect(() => {
     axios({
       url: `${apiUrl}/songs`,
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${this.props.user.token}`
-      }
+      method: 'GET'
     })
-      .then(res => {
-        this.setState({ songs: res.data.songs })
-      })
-      .catch(error => {
-        msgAlert({
-          heading: 'Get Songs Failed with error: ' + error.message,
-          variant: 'danger'
-        })
-      })
+      .then(res => setSongs(res.data.songs))
+      .catch()
+  }, [])
+
+  // Declaring songList variable
+  let songList
+
+  // If there are no songs
+  if (!songs) {
+    songList = 'You don\'t have any songs!'
+  } else if (songs) {
+    // Display the Songs
+    songList = songs.map(song => (
+      <tbody key={song._id}>
+        <tr>
+          <td><Link className="song-link" to={`/songs/${song._id}`}>{song.title}</Link></td>
+          <td>{song.artist}</td>
+          <td>{song.album}</td>
+          <td>{song.year}</td>
+        </tr>
+      </tbody>
+    ))
+  } else {
+    songList = <img src="https://media.giphy.com/media/1416VN7GIFAAmI/giphy.gif" />
   }
 
-  render () {
-    // Destructure things from state:
-    const { songs } = this.state
-    let songJSX
-
-    if (!songs) {
-      songJSX = 'You don\'t have any songs!'
-    } else if (songs) {
-      // Display the Songs
-      const songList = songs.map(song => (
-        <li key={song._id}>
-          <Link className="song-link" to={`/songs/${song._id}`}>{song.title}</Link>
-        </li>
-      ))
-
-      songJSX = (
-        <div>
-          {songList}
-        </div>
-      )
-    } else {
-      songJSX = <img src="https://media.giphy.com/media/1416VN7GIFAAmI/giphy.gif" />
-    }
-
-    return (
-      <div>
-        <h1 className="title">Songs Page</h1>
-        {songJSX}
-      </div>
-    )
-  }
+  // Return the list of songs as a table
+  return (
+    <div>
+      <h1 className="title">Here are a list of all the songs</h1>
+      <table responsive="sm" className="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Album</th>
+            <th>Year Released</th>
+          </tr>
+        </thead>
+        {songList}
+      </table>
+    </div>
+  )
 }
 
 export default Songs

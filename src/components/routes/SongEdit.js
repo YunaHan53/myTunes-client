@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
+import messages from '../AutoDismissAlert/messages'
 
 // Import song form
 import SongForm from '../shared/SongForm'
@@ -8,95 +9,82 @@ import axios from 'axios'
 // Import apiUrl
 import apiUrl from '../../apiConfig'
 
-class SongEdit extends Component {
-  constructor () {
-    super()
+const SongEdit = props => {
+  const [song, editSong] = useState({
+    title: '',
+    artist: '',
+    album: '',
+    year: '',
+    url: ''
+  })
+  const [edited, setEditedSong] = useState(false)
 
-    this.state = {
-      song: {
-        title: '',
-        artist: '',
-        album: '',
-        year: '',
-        url: ''
-      },
-      updated: false
-    }
-  }
-
-  // Finds the song
-  componentDidMount () {
-    const { msgAlert } = this.props
-
-    axios({
-      url: `${apiUrl}/songs/${this.props.match.params.id}`,
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${this.props.user.token}`
-      }
-    })
-      .then(res => this.setState({ song: res.data.song }))
-      .catch(error => {
-        msgAlert({
+  // Updates the song
+  useEffect(() => {
+    axios(`${apiUrl}/songs/${props.match.params.id}`)
+      .then(res => editSong(res.data.song))
+      .catch(error =>
+        props.msgAlert({
           heading: 'Update Failed with error: ' + error.message,
           variant: 'danger'
-        })
-      })
-  }
+        }))
+  }, [])
 
-  handleSubmit = (event) => {
+  // On handle submit
+  const handleSubmit = event => {
     event.preventDefault()
-
-    const { msgAlert } = this.props
-
+    // If the song doesn't belong to owner
+    if (props.user._id !== song.owner) {
+      props.msgAlert({
+        heading: 'You do not own this song',
+        message: messages.notOwner,
+        variant: 'danger'
+      })
+    }
+    // API call for update
     axios({
+      url: `${apiUrl}/songs/${props.match.params.id}`,
       method: 'PATCH',
-      url: `${apiUrl}/songs/${this.props.match.params.id}`,
-      data: { song: this.state.song },
+      data: { song },
       headers: {
-        Authorization: `Bearer ${this.props.user.token}`
+        Authorization: `Bearer ${props.user.token}`
       }
     })
-      .then((res) => {
-        this.setState({ updated: true })
+      .then(res => {
+        setEditedSong(true)
       })
       .catch(error => {
-        msgAlert({
+        props.msgAlert({
           heading: 'Update Failed with error: ' + error.message,
+          message: 'Cannot Update :(',
           variant: 'danger'
         })
       })
   }
 
-  handleChange = (event) => {
-    const updateField = {
-      [event.target.name]: event.target.value
-    }
-    const updatedSong = Object.assign(this.state.song, updateField)
-    this.setState({ song: updatedSong })
+  // On handle change
+  const handleChange = event => {
+    editSong({ ...song, [event.target.name]: event.target.value })
   }
 
-  render () {
-    const { handleChange, handleSubmit } = this
-    const { song, updated } = this.state
-
-    if (updated) {
-      return <Redirect to={`/songs/${this.props.match.params.id}`} />
-    }
-
-    // console.log(song)
-    return (
-      <div>
-        <h3 className="title">Update Song Here</h3>
-        <SongForm
-          song={song}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          cancelPath={`/songs/${this.props.match.params.id}`}
-        />
-      </div>
-    )
+  // If successfully edited, redirect to /songs/:id
+  if (edited) {
+    return <Redirect to={`/songs/${props.match.params.id}`} />
   }
+  // console.log(song)
+
+  // Return SongForm
+  return (
+    <div>
+      <h3 className="title">Update Song Here</h3>
+      <SongForm
+        song={song}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        cancelPath={`/songs/${props.match.params.id}`}
+      />
+    </div>
+  )
 }
 
 export default SongEdit

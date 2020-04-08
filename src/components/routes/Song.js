@@ -1,97 +1,120 @@
-import React, { Component } from 'react'
+// Import React and the Component
+import React, { useEffect, useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-
+import messages from '../AutoDismissAlert/messages'
+// Import button styling from Bootstrap
 import Button from 'react-bootstrap/Button'
+import ReactPlayer from 'react-player'
 
 // Import Axios:
 import axios from 'axios'
 // Import apiConfig:
 import apiUrl from '../../apiConfig'
 
-class Song extends Component {
-  constructor (props) {
-    super(props)
+// Song component with constructor
+const Song = props => {
+  const [song, setSong] = useState(null)
+  const [deleted, setDeleted] = useState(false)
+  // const [playing, setPlaying] = useState({ url: '' })
 
-    this.state = {
-      song: null,
-      deleted: false
-    }
-  }
+  // Call this callback once after the first render, this only occurs once
+  // because our dependency array is empty, so our dependencies never change
+  // similar to componentDidMount
+  useEffect(() => {
+    // API call to the below url to get the song info
+    axios(`${apiUrl}/songs/${props.match.params.id}`)
+      // Make sure to update this.setState to our hooks setSong function
+      .then(res => setSong(res.data.song))
+      .catch()
+  }, [])
 
-  componentDidMount () {
-    const { msgAlert } = this.props
+  // console.log(props)
 
-    axios(`${apiUrl}/songs/${this.props.match.params.id}`)
-      .then(res => this.setState({ song: res.data.song }))
-      .catch(error => {
-        msgAlert({
-          heading: 'Get Song Failed with error: ' + error.message,
-          variant: 'danger'
-        })
+  // On deleting the song
+  const destroy = () => {
+    // If the song does not belong to owner
+    if (props.user._id !== song.owner) {
+      props.msgAlert({
+        heading: 'You do not own this song',
+        message: messages.notOwner,
+        variant: 'danger'
       })
-  }
-
-  delete = () => {
-    const { msgAlert } = this.props
-
+    }
+    // If the song can delete, run this API call
     axios({
-      url: `${apiUrl}/songs/${this.props.match.params.id}`,
+      url: `${apiUrl}/songs/${props.match.params.id}`,
       method: 'DELETE',
       headers: {
-        Authorization: `Bearer ${this.props.user.token}`
+        Authorization: `Bearer ${props.user.token}`
       }
     })
-      .then(() => this.setState({ deleted: true }))
-      .catch(error => {
-        msgAlert({
-          heading: 'Delete Song Failed with error: ' + error.message,
-          variant: 'danger'
-        })
-      })
+      .then(() => setDeleted(true))
+      .catch(error => props.msgAlert({
+        heading: 'Delete Song Failed: ' + error.message,
+        message: 'You cannot delete other peoples song sorry',
+        variant: 'danger'
+      }))
+  }
+  // When the song is successfully deleted, reroute to this page.
+  if (deleted) {
+    return <Redirect to={
+      { pathname: '/songs',
+        state: {
+          message: 'Song deleted!'
+        }
+      }
+    } />
   }
 
-  render () {
-    const { song, deleted } = this.state
+  // If no songs can be found
+  if (!song) {
+    return <p>Loading...</p>
+  }
 
-    if (deleted) {
-      return <Redirect to='/songs' />
-    }
+  // const playSong = () => {
+  //   if (playing === false) {
+  //     setPlaying(true)
+  //   }
+  // }
+  //
+  // const playBtn = (
+  //   <Button variant="outline-success" onClick={playSong}>Play Song</Button>
+  // )
 
-    if (!song) {
-      return (
-        <img src="https://media.giphy.com/media/1416VN7GIFAAmI/giphy.gif" />
-      )
-    }
-    // console.log(this.props.match.params.id)
-    // console.log(song.url)
+  // Setting the buttons
+  const editBtn = (
+    <Link to={`/songs/${props.match.params.id}/edit`}>
+      <Button variant="outline-success">Update Song</Button>
+    </Link>
+  )
+  const deleteBtn = (<Button variant="outline-success" onClick={destroy}>Delete Song</Button>)
 
-    return (
-    // Display song info
-      <div className='song-info'>
-        <h3>{song.title}</h3>
-        <p>Artist: {song.artist}</p>
-        <p>Album: {song.album}</p>
-        <p>Year Released: {song.year}</p>
-        <p>Link: <Link to={{
-          pathname: '/songs/song-player/',
-          state: {
-            fromSong: true,
-            song: song.url
-          }
-        }}>
-          {song.url}
-        </Link>
-        </p>
-        <Link to={`/songs/${this.props.match.params.id}/edit`}>
-          <Button variant="outline-success">Update Song</Button>
-        </Link>
-        <Button variant="outline-success" onClick={this.delete}>Delete Song</Button>
-        <Link to="/songs">
-          <Button variant="outline-success">Back to song list</Button>
-        </Link>
+  // console.log(this.props.match.params.id)
+  // console.log(song.url)
+
+  return (
+  // Otherwise, display song info and edit and delete buttons
+    <div className='song-info'>
+      <h3>{song.title}</h3>
+      <p>Artist: {song.artist}</p>
+      <p>Album: {song.album}</p>
+      <p>Year Released: {song.year}</p>
+      <p>Link: {song.url}</p>
+      {(props.user._id === song.owner) ? <span>{editBtn}</span> : ''}
+      {(props.user._id === song.owner) ? <span>{deleteBtn}</span> : ''}
+      <Link to="/songs">
+        <Button variant="outline-success">Back to song list</Button>
+      </Link>
+      <div className="player player-wrapper">
+        <ReactPlayer
+          className='react-player'
+          url={song.url} controls={true}
+          width='100%'
+          height='100%'
+        />
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Song

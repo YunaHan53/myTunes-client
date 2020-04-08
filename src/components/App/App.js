@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 
+// Importing AuthenticatedRoutes
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
 import Header from '../Header/Header'
@@ -9,12 +10,13 @@ import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 
+// Importing Song Routes
 import Songs from '../routes/Songs'
 import Song from '../routes/Song'
 import SongCreate from '../routes/SongCreate'
 import SongEdit from '../routes/SongEdit'
 
-import SongPlayer from '../SongPlayer/SongPlayer'
+// import SongPlayer from '../SongPlayer/SongPlayer'
 
 import Home from '../Home/Home'
 
@@ -74,9 +76,6 @@ class App extends Component {
           )}/>
           <AuthenticatedRoute user={user} exact path='/songs/:id' render={({ match }) => (
             <Song msgAlert={this.msgAlert} user={user} match={match} />
-          )}/>
-          <AuthenticatedRoute user={user} exact path='/songs/song-player/' render={({ match }) => (
-            <SongPlayer msgAlert={this.msgAlert} user={user} match={match} />
           )}/>
           <AuthenticatedRoute user={user} exact path='/home' render={() => (
             <Home msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />

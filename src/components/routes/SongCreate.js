@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
+// import messages from '../AutoDismissAlert/messages'
 
 // Import song form
 import SongForm from '../shared/SongForm'
@@ -8,74 +9,63 @@ import axios from 'axios'
 // Import apiUrl
 import apiUrl from '../../apiConfig'
 
-class SongCreate extends Component {
-  constructor () {
-    super()
+const SongCreate = props => {
+  const [song, setSong] = useState({
+    title: '',
+    artist: '',
+    album: '',
+    year: '',
+    url: ''
+  })
+  const [createdSongId, setCreatedSongId] = useState(null)
 
-    this.state = {
-      song: {
-        title: '',
-        artist: '',
-        album: '',
-        year: '',
-        url: ''
-      },
-      created: false,
-      createId: ''
-    }
-  }
-
-  handleSubmit = (event) => {
+  // On Submit
+  const handleSubmit = event => {
     event.preventDefault()
 
-    const { msgAlert } = this.props
-
     axios({
-      method: 'post',
+      method: 'POST',
       url: `${apiUrl}/songs/`,
-      data: { song: this.state.song },
+      data: { song },
       headers: {
-        Authorization: `Bearer ${this.props.user.token}`
+        Authorization: `Bearer ${props.user.token}`
       }
     })
-      .then((res) => {
-        this.setState({ created: true, createId: res.data.song._id })
-      })
+      .then((res) => setCreatedSongId(res.data.song._id))
       .catch(error => {
-        msgAlert({
+        props.msgAlert({
           heading: 'Create Song Failed with error: ' + error.message,
           variant: 'danger'
         })
       })
   }
 
-  handleChange = (event) => {
+  // On handle change
+  const handleChange = event => {
     const createField = {
       [event.target.name]: event.target.value
     }
-    const createdSong = Object.assign(this.state.song, createField)
-    this.setState({ song: createdSong })
+    const createdSong = Object.assign({ ...song }, createField)
+    setSong(createdSong)
   }
 
-  render () {
-    const { handleChange, handleSubmit } = this
-    const { created, song } = this.state
-
-    if (created) {
-      return <Redirect to={'/songs/'} />
-    }
-    return (
-      <div>
-        <h3 className="title">Create Song Here</h3>
-        <SongForm
-          song={song}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          cancelPath="/songs"
-        />
-      </div>
-    )
+  // If song is created, redirect to /songs/:id
+  if (createdSongId) {
+    return <Redirect to={`/songs/${createdSongId}`} />
   }
+
+  // Return the SongForm
+  return (
+    <div>
+      <h3 className="title">Create Song Here</h3>
+      <SongForm
+        song={song}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        cancelPath="/songs"
+      />
+    </div>
+  )
 }
 
 export default SongCreate

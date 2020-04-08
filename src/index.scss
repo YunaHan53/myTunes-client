@@ -4,18 +4,18 @@ $element-background-color: #000;
 $element-light-color: #fff;
 $page-background-color: #E1FEB0;
 $styled-font: 'Pacifico', cursive, Arial, Sans-serif;
-$basic-font: 'Dosis', sans-serif;
+$basic-font: 'Dosis', cursive, Sans-serif;
 
 .player-wrapper {
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
   position: relative;
-  padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
 }
 
 .react-player {
-  position: absolute;
-  top: 0;
   left: 0;
   padding-top: 3%;
+  position: absolute;
+  top: 0;
 }
 
 .song-info {
@@ -35,19 +35,23 @@ $basic-font: 'Dosis', sans-serif;
   font-family: $styled-font;
 }
 
-div .title {
+.table {
+  width: auto;
+}
+
+.title {
   font-family: $basic-font;
 }
 
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  color: #fff;
   background: $success;
-  font-family: $styled-font;
-  text-align: center;
+  bottom: 0;
+  color: #fff;
   display: inline;
+  font-family: $styled-font;
+  left: 0;
   padding: 0 10px;
+  position: fixed;
+  text-align: center;
+  width: 100%;
 }

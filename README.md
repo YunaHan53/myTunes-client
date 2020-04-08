@@ -3,19 +3,28 @@
 ## **Intro**
 This is my myTunes front-end application.
 
+## **Application Screenshots**
+___
+
+![](src/images/mytunes-app.png)
+
+
 **Backstory**
 I have always been facinated with music and how much music streaming platforms have changed so drastically in the past 2 decades. I remember listening to music on the vinyl when I was very young, and then on tape cassettes and CD players. I also remember clearly when portable players such as ipods came out like it was yesterday. When the internet became popular, I also jumped on the digital bandwagon and later on, when I was 17, I also became interested in building my own websites and have always looked for ways to add a music player to my page. This was no exception. I know this is what I'm passionate about and that's why I'm building my very own music app.
 
 
 ## **Templates**
-- [React Template] (https://git.generalassemb.ly/ga-wdi-boston/react-auth-template)
-- [API Template] (https://git.generalassemb.ly/ga-wdi-boston/express-api-template)
+- [React Template](https://git.generalassemb.ly/ga-wdi-boston/react-auth-template)
+- [API Template](https://git.generalassemb.ly/ga-wdi-boston/express-api-template)
 
 
 ## **Planning**
 Day 1: I started by setting up the Express API template and the React Auth Template. After the initial commit is done and both server and client are deployed, I proceeded to the API template and added model & routes for my song resource, and also completed CRUD on the api using Postman.
+
 Day 2: On the client side, I began adding Component & routes to Song with these files: Songs, Song, CreateSong & EditSong. Also wrote all the necessary axios calls to the API. I was able to complete most of the CRUD by the end of the day but with EditSong & Delete still in progress.
+
 Day 3: I continued to work on EditSong and Delete and finished CRUD on the client side by midday. I then added a new Song component called SongPlayer where I can stream the song when a user clicks on the song link.
+
 Day 4: I had a bit of a setback because getting a song to play on clicking the song link proves to be a bit of a challenge. With some help though, I was able to complete the task. I then started doing some CSS styling and updating the README. Finishing up the project.
 
 
@@ -38,7 +47,7 @@ Day 4: I had a bit of a setback because getting a song to play on clicking the s
 - JavaScript
 - React.js
 - Express.js
-- Handlebars
+- Postman
 - Bootstrap
 - MongoDB
 - Heroku
@@ -67,10 +76,9 @@ Day 4: I had a bit of a setback because getting a song to play on clicking the s
 
 
 ## **WireFrames**
+___
 
----
   ![](src/images/Wireframes.png)
-  ![](src/images/mytunes-app.png)
 
 
 
