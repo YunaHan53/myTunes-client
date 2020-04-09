@@ -44,7 +44,7 @@ const Songs = props => {
   // Return the list of songs as a table
   return (
     <div>
-      <h1 className="title">Here are a list of all the songs</h1>
+      <h2 className="title">Here are a list of all the songs</h2>
       <table responsive="sm" className="table">
         <thead>
           <tr>

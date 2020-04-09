@@ -109,8 +109,8 @@ const Song = props => {
         <ReactPlayer
           className='react-player'
           url={song.url} controls={true}
-          width='100%'
-          height='100%'
+          width='90%'
+          height='90%'
         />
       </div>
     </div>
