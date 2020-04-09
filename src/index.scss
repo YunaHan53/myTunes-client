@@ -6,6 +6,12 @@ $page-background-color: #E1FEB0;
 $styled-font: 'Pacifico', cursive, Arial, Sans-serif;
 $basic-font: 'Dosis', cursive, Sans-serif;
 
+body {
+  height: 100%;
+  width: 100%;
+}
+
+// Video Player Styling
 .player-wrapper {
   padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
   position: relative;
@@ -18,31 +24,61 @@ $basic-font: 'Dosis', cursive, Sans-serif;
   top: 0;
 }
 
+// Styling the Homepage
+.homepage {
+  background-attachment: fixed;
+  background-image: url('https://i.imgur.com/pbRlaHA.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-width: 100vh;
+  position: relative;
+}
+
+.homepage-text {
+  align-content: center;
+  color: $success;
+  display: flex;
+  font-family: $styled-font;
+  font-size: 3em;
+  font-weight: 700;
+  padding: 20px;
+}
+
+// Styling all the navigation links in Header.js
+.link {
+  font-family: $styled-font;
+}
+
+// Styling the navbar title
+.nav-title {
+  font-family: $styled-font;
+}
+
+// Styling the song info in Song.js
 .song-info {
   font-family: $styled-font;
 }
 
+// Styling the song links on list of songs page
 .song-link {
   color: $success;
   font-family: $styled-font;
 }
 
-.link {
-  font-family: $styled-font;
-}
-
-.nav-title {
-  font-family: $styled-font;
-}
-
+// Styling the table in List of songs page
 .table {
   width: auto;
 }
 
+// Styling the title in list of songs page
 .title {
   font-family: $basic-font;
 }
 
+// Styling the footer of the page
 .footer {
   background: $success;
   bottom: 0;

@@ -1,19 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
+import '../../index.scss'
 
-class Home extends Component {
-  constructor () {
-    super()
-
-    this.state = {}
-  }
-
-  render () {
-    return (
-      <div className='homepage'>
-        <img src="../images/musicart.png"/>
-      </div>
-    )
-  }
+const Home = props => {
+  return (
+    <div className='homepage'>
+      <h2 className='homepage-text'>music-lify your life</h2>
+    </div>
+  )
 }
 
 export default Home
