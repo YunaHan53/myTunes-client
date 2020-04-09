@@ -9,7 +9,7 @@ ___
 ![](src/images/mytunes-app.png)
 
 
-**Backstory**
+## **Backstory**
 I have always been facinated with music and how much music streaming platforms have changed so drastically in the past 2 decades. I remember listening to music on the vinyl when I was very young, and then on tape cassettes and CD players. I also remember clearly when portable players such as ipods came out like it was yesterday. When the internet became popular, I also jumped on the digital bandwagon and later on, when I was 17, I also became interested in building my own websites and have always looked for ways to add a music player to my page. This was no exception. I know this is what I'm passionate about and that's why I'm building my very own music app.
 
 
@@ -27,6 +27,7 @@ Day 3: I continued to work on EditSong and Delete and finished CRUD on the clien
 
 Day 4: I had a bit of a setback because getting a song to play on clicking the song link proves to be a bit of a challenge. With some help though, I was able to complete the task. I then started doing some CSS styling and updating the README. Finishing up the project.
 
+UPDATE 4/8/2020: I ran into a user-facing bug so I changed the app to have the embedded video player render automatically when the user clicks on the song in the songList for more info. Use will still have to click the play button on the video player to listen to the song.
 
 ## **User Stories**
 - A user will be able to sign up if a new user.
@@ -38,40 +39,48 @@ Day 4: I had a bit of a setback because getting a song to play on clicking the s
 - A user will be able to view the song info upon clicking on the song link.
 - A user will be able to edit their song via a form-field.
 - A user will be able to delete songs.
-- A user will be able to play the uploaded songs on a web music player when the link is clicked.
+- A user will be able to play the songs via embedded video player when they click on the song.
 
 
 ## **Technologies Used**
+Front-End Client
 - HTML5
 - CSS3
 - JavaScript
+- Axios
+- Bootstrap
 - React.js
+
+Back-End API
 - Express.js
 - Postman
-- Bootstrap
 - MongoDB
 - Heroku
 - Github
 
 
 ## **Unsolved Problems**
-- I would like to have user be able to create a playlist with their created songs.
+- Code Refactoring.
+- I would like to have user be able to add their favorite songs to their playlist.
 - I would like to have the player to play the playlist with or without loop options.
 - I would like to have the player to play music continuously when you navigate the site.
 
 
 ## Repos & Deployed Sites
 
-[Client Repo](https://github.com/YunaHan53/myTunes-client)
-[Deployed Client](https://yunahan53.github.io/myTunes-client/)
-[API Repo](https://github.com/YunaHan53/myTunes-api)
-[Deployed API](https://aqueous-temple-54494.herokuapp.com/)
+- [Client Repo](https://github.com/YunaHan53/myTunes-client)
+- [Deployed Client](https://yunahan53.github.io/myTunes-client/)
+- [API Repo](https://github.com/YunaHan53/myTunes-api)
+- [Deployed API](https://aqueous-temple-54494.herokuapp.com/)
 
 
-## Usage
+## Setup Instructions
 
-- `npm install react-player`:[ReactPlayer](https://github.com/CookPete/react-player)
-- `npm run start`: generates bundles, watches, and livereloads.
+- Fork and clone this repository and the [Backend Repo](https://github.com/YunaHan53/myTunes-api)
+- Navigate to this repository using the command line
+- Run `npm install` to install dependencies
+- Run `npm install react-player`:[ReactPlayer](https://github.com/CookPete/react-player)
+- Run `npm run start`: to run local host: generates bundles, watches, and livereloads.
 - `npm run deploy`: builds and deploys master branch
 
 

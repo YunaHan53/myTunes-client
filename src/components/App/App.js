@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 
 // Importing AuthenticatedRoutes
+import Home from '../Home/Home'
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
 import Header from '../Header/Header'
@@ -17,8 +18,6 @@ import SongCreate from '../routes/SongCreate'
 import SongEdit from '../routes/SongEdit'
 
 // import SongPlayer from '../SongPlayer/SongPlayer'
-
-import Home from '../Home/Home'
 
 class App extends Component {
   constructor () {
@@ -53,6 +52,9 @@ class App extends Component {
           />
         ))}
         <main className="container">
+          <Route exact path='/' render={() => (
+            <Home msgAlert={this.msgAlert} setUser={this.setUser} />
+          )} />
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
@@ -77,9 +79,6 @@ class App extends Component {
           <AuthenticatedRoute user={user} exact path='/songs/:id' render={({ match }) => (
             <Song msgAlert={this.msgAlert} user={user} match={match} />
           )}/>
-          <AuthenticatedRoute user={user} exact path='/home' render={() => (
-            <Home msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
-          )} />
         </main>
       </Fragment>
     )
