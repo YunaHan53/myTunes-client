@@ -51,7 +51,7 @@ class App extends Component {
             message={msgAlert.message}
           />
         ))}
-        <main className="container">
+        <main className="container-fluid">
           <Route exact path='/' render={() => (
             <Home msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />

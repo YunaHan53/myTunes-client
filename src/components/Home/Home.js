@@ -4,7 +4,7 @@ import '../../index.scss'
 const Home = props => {
   return (
     <div className='homepage'>
-      <h2 className='homepage-text'>music-lify your life</h2>
+      <h2 className='homepage-text'>music-fy your life</h2>
     </div>
   )
 }
