@@ -22,10 +22,8 @@ const Songs = props => {
   // Declaring songList variable
   let songList
 
-  // If there are no songs
-  if (!songs) {
-    songList = 'You don\'t have any songs!'
-  } else if (songs) {
+  // If songs exist
+  if (songs) {
     // Display the Songs
     songList = songs.map(song => (
       <tbody key={song._id}>
@@ -38,7 +36,7 @@ const Songs = props => {
       </tbody>
     ))
   } else {
-    songList = <img src="https://media.giphy.com/media/1416VN7GIFAAmI/giphy.gif" />
+    songList = 'You don\'t have any songs!'
   }
 
   // Return the list of songs as a table
