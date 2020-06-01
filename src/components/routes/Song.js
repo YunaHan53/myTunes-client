@@ -99,7 +99,7 @@ const Song = props => {
       <p>Artist: {song.artist}</p>
       <p>Album: {song.album}</p>
       <p>Year Released: {song.year}</p>
-      <a href={'http://' + song.url} target="_blank" rel="noopener noreferrer">{song.url}</a>
+      <p><a href={song.url} target="_blank" rel="noopener noreferrer">{song.url}</a></p>
       {(props.user._id === song.owner) ? <span>{editBtn}</span> : ''}
       {(props.user._id === song.owner) ? <span>{deleteBtn}</span> : ''}
       <Link to="/songs">
